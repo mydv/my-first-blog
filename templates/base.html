@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+    <head>
+        <title>Mohit's blog</title>
+		<!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
+    </head>
+    <body>
+        <header>
+            <h1><a href="/">Django Girls Blog</a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><p>Hello {{ user.username }}</p></li>
+                        <li><a href="{% url 'post_new' %}" class="top-menu">Create new post</a></li>
+                        <li><a href="{% url 'post_draft_list' %}" class="top-menu">Drafts</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="top-menu">Login to create new post</a>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <hr>
+        <div class="content container">
+            {% block content %}
+            {% endblock %} 
+        </div>
+    </body>
+</html>

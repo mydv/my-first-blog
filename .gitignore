@@ -7,3 +7,4 @@ db.sqlite3
 .DS_Store
 .vscode
 local_settings.py
+heroku_settings.py
