@@ -10,12 +10,16 @@
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><p>Hello {{ user.username }}</p></li>
-                        <li><a href="{% url 'post_new' %}" class="top-menu">Create new post</a></li>
-                        <li><a href="{% url 'post_draft_list' %}" class="top-menu">Drafts</a></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        <p>Hello {{ user.username }}</p>
+                        <a href="{% url 'post_new' %}">Create new post</a>
+                        <a href="{% url 'post_draft_list' %}">Drafts</a>
+                        <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
                     {% else %}
-                        <a href="{% url 'login' %}" class="top-menu">Login to create new post</a>
+                        <a href="{% url 'accounts:login' %}">Login to create new post</a>
+                        <a href="{% url 'accounts:signup' %}">Signup</a>
                     {% endif %}
                 </ul>
             </nav>
