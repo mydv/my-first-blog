@@ -20,11 +20,11 @@
     <hr>
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
     {% for comment in post.comments.all %}
-        {% if user.is_authenticated or not comment.hide_comment %}
+        {% if user == post.author or not comment.hide_comment %}
             <div class="comment">
                 <div>
                     <strong>{{ comment.author }}</strong> | {{ comment.created_date }}
-                    {% if user.is_authenticated %}
+                    {% if user == post.author %}
                     <div>
                         {% if not comment.hide_comment %}
                             <a class="btn btn-default" href="{% url 'comment_hide' pk=comment.pk %}">hide</a>
