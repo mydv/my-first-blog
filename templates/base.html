@@ -3,18 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>View Point</title>
+        <title>Wall of Thoughts</title>
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
     <body>
         <header class="wrapper">
-            <h1><a href="/">View Point</a></h1>
+            <h1><a href="/">Wall of Thoughts</a></h1>
             <p>Share your thoughts through blog</p>
             <hr>
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
                         <li><p>Hello {{ user.username }} |</p></li>
+                        <li><a href="/">Home</a></li> |
                         <li><a href="{% url 'post_new' %}">Create new post</a></li> |
                         <li><a href="{% url 'post_draft_list' %}">Drafts</a></li> |
                         <li><form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
@@ -22,20 +23,23 @@
                             <button type="submit">Logout</button>
                         </form></li>
                     {% else %}
+                        <li><a href="/">Home</a></li> |
                         <li><a href="{% url 'accounts:login' %}">Login to create new post</a></li> |
                         <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
                     {% endif %}
                 </ul>
             </nav>
+            <hr>
         </header>
-        <hr>
+        
         <div class="wrapper">
             {% block content %}
             {% endblock %} 
         </div>
-        <hr>
+        
         <footer>
-            <p>made by mohit</p>
+            <hr>
+            <p>Made by: <a href="https://github.com/mydv">Mohit</a></p>
         </footer>
     </body>
 </html>

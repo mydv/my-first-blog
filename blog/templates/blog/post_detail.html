@@ -18,20 +18,21 @@
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
     <hr>
-    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+    <p><a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a></p>
+    
     {% for comment in post.comments.all %}
         {% if user == post.author or not comment.hide_comment %}
             <div class="comment">
                 <div>
                     <strong>{{ comment.author }}</strong> | {{ comment.created_date }}
                     {% if user == post.author %}
-                    <div>
-                        {% if not comment.hide_comment %}
-                            <a class="btn btn-default" href="{% url 'comment_hide' pk=comment.pk %}">hide</a>
-                        {% else %}
-                            <a class="btn btn-default" href="{% url 'comment_hide' pk=comment.pk %}">unhide</a>
-                        {% endif %}
-                    </div>
+                        <span> | 
+                            {% if not comment.hide_comment %}
+                                <a class="btn btn-default" href="{% url 'comment_hide' pk=comment.pk %}">hide</a>
+                            {% else %}
+                                <a class="btn btn-default" href="{% url 'comment_hide' pk=comment.pk %}">unhide</a>
+                            {% endif %}
+                        </span>
                     {% endif %}
                 </div>
                 <p>{{ comment.text|linebreaks }}</p>
